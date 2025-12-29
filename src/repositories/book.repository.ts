@@ -1,12 +1,12 @@
 import { Book } from "../types/book.type";
 
 let books: Book[] = [
-    { id: 'B-1', title: 'andriod' },
-    { id: 'B-2', title: 'ios', date: '2023-01-01' },
+    { id: "B-1", title: "android" },
+    { id: "B-2", title: "ios", date: "2023-01-01" },
 ];
 
 export interface IBookRepository {
-    createBook(book: Book): void;
+    createBook(book: Book): Book; // fixed: returns Book
     getBooks(): Book[];
     findBookById(id: string): Book | undefined;
 }
@@ -14,16 +14,14 @@ export interface IBookRepository {
 export class BookRepository implements IBookRepository {
     createBook(book: Book): Book {
         books.push(book);
-        return book;
+        return book; // return the created book
     }
+
     getBooks(): Book[] {
         return books;
     }
 
     findBookById(id: string): Book | undefined {
-
         return books.find((book: Book) => book.id === id);
-
     }
-
 }
